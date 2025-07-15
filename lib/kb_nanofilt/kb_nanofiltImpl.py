@@ -2,6 +2,11 @@
 #BEGIN_HEADER
 import logging
 import os
+import shutil
+
+from installed_clients.KBaseReportClient import KBaseReport
+from installed_clients.readsutilsClient import ReadsUtils
+from .Utils.createHtmlReport import HTMLReportCreator
 
 from installed_clients.KBaseReportClient import KBaseReport
 #END_HEADER
