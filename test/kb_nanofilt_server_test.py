@@ -4,7 +4,7 @@ import time
 import unittest
 from configparser import ConfigParser
 
-from kb_nanofilt.kb_nanofiltImpl import run_kb_nanofilt
+from kb_nanofilt.kb_nanofiltImpl import kb_nanofilt
 from kb_nanofilt.kb_nanofiltServer import MethodContext
 from kb_nanofilt.authclient import KBaseAuth as _KBaseAuth
 
@@ -63,5 +63,6 @@ class kb_nanofiltTest(unittest.TestCase):
         #
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
-        ret = self.serviceImpl.run_kb_nanofilt(self.ctx, {'workspace_name': self.wsName,
-                                                             'parameter_1': 'Hello World!'})
+        ret = self.serviceImpl.run_kb_nanofilt(self.ctx, {'workspace_name': 'allenbh:narrative_1753284786806',
+                                                             'input_reads_ref': '75985/3/1',
+                                                             'output_reads_name': 'test_output_reads_name'})
