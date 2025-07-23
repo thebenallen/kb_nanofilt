@@ -4,7 +4,7 @@ import time
 import unittest
 from configparser import ConfigParser
 
-from kb_nanofilt.kb_nanofiltImpl import kb_nanofilt
+from kb_nanofilt.kb_nanofiltImpl import run_kb_nanofilt
 from kb_nanofilt.kb_nanofiltServer import MethodContext
 from kb_nanofilt.authclient import KBaseAuth as _KBaseAuth
 
