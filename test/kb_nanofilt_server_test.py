@@ -66,3 +66,4 @@ class kb_nanofiltTest(unittest.TestCase):
         ret = self.serviceImpl.run_kb_nanofilt(self.ctx, {'workspace_name': 'allenbh:narrative_1753284786806',
                                                              'input_reads_ref': '75985/3/1',
                                                              'output_reads_name': 'test_output_reads_name'})
+        input_file_path = input_file_info['files']['fwd']

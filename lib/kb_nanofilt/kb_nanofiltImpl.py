@@ -81,7 +81,7 @@ class kb_nanofilt:
         input_file_path = os.path.join(input_file_info['files'])
         logging.info('Input file path: ' + input_file_path)
 
-        returned_dict = run_lighter(input_file_path, resultsDirectory, reportFile,)
+        returned_dict = run_kb_nanofilt(input_file_path, resultsDirectory, reportFile,)
         logging.info('Returned dictionary: ' + str(returned_dict))
 
         corrected_file_path = returned_dict['corrected_file_path']
