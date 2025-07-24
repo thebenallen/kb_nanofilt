@@ -6,6 +6,7 @@ import shutil
 
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.readsutilsClient import ReadsUtils
+from .Utils.run_NanoFiltUtils import run_NanoFilt, upload_reads
 from .Utils.createHtmlReport import HTMLReportCreator
 
 from installed_clients.KBaseReportClient import KBaseReport
@@ -78,10 +79,10 @@ class kb_nanofilt:
         resultsDirectory = os.path.join(self.shared_folder, 'Results')        
 
         # # Get the path from input_file_info['files']
-        input_file_path = os.path.join(input_file_info['files'])
+        input_file_path = os.path.join(input_file_info['files']['fwd'])
         logging.info('Input file path: ' + input_file_path)
 
-        returned_dict = run_kb_nanofilt(input_file_path, resultsDirectory, reportFile,)
+        returned_dict = run_NanoFilt(input_file_path, resultsDirectory, reportFile, params['length'], params['maxlength'], params['quality'], params['mingc'], params['maxgc'], params['headcrop'], params['tailcrop'])
         logging.info('Returned dictionary: ' + str(returned_dict))
 
         corrected_file_path = returned_dict['corrected_file_path']
