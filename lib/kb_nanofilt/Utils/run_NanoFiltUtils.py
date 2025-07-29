@@ -1,9 +1,10 @@
 import subprocess
 import os
+import logging
 from installed_clients.readsutilsClient import ReadsUtils
 from installed_clients.DataFileUtilClient import DataFileUtil
 
-def run_NanoFilt(input_file, result_dir, report_file, length, maxlength, quality, mingc, maxgc, headcrop, tailcrop, threads=10):
+def run_NanoFilt(input_file, result_dir, report_file, length, maxlength, quality, mingc, maxgc, headcrop, tailcrop):
     try:
         # Construct the NanoFilt command with additional parameters
         command = [
@@ -11,15 +12,14 @@ def run_NanoFilt(input_file, result_dir, report_file, length, maxlength, quality
             '-l', str(length),
             '--maxlength', str(maxlength),
             '-q', str(quality),
-            '--mingc', str(mingc),
-            '--maxgc', str(maxgc),
+            '--minGC', str(mingc),
+            '--maxGC', str(maxgc),
             '--headcrop', str(headcrop),
-            '--tailcrop', str(tailcrop),
-            '-t', str(threads)
+            '--tailcrop', str(tailcrop)
         ]
-        
-        # Run the NanoFilt command and capture the output
-        result = subprocess.run(command, capture_output=True, text=True, check=True)
+    
+        # Ensure result_dir exists
+        os.makedirs(result_dir, exist_ok=True)
         
         # Create a directory for report_file if it doesn't exist
         if not os.path.exists(os.path.dirname(report_file)):
@@ -29,17 +29,20 @@ def run_NanoFilt(input_file, result_dir, report_file, length, maxlength, quality
         if not os.path.exists(result_dir):
             os.makedirs(result_dir)
 
-        # Write the output to the specified HTML-formatted file
+        # Output file for filtered reads
+        prefix = os.path.basename(input_file).split('.')[0]
+        filtered_file = os.path.join(result_dir, f"{prefix}.filtered.fastq")
+
+        with open(input_file, 'r') as infile, open(filtered_file, 'w') as outfile:
+            result = subprocess.run(command, stdin=infile, stdout=outfile, stderr=subprocess.PIPE, text=True, check=True)
+
+        # Write stderr to HTML report
+        os.makedirs(os.path.dirname(report_file), exist_ok=True)
         with open(report_file, 'w') as f:
             f.write("<html><body><pre>")
             f.write(result.stderr)
             f.write("</pre></body></html>")
-            
-        print(f"NanoFilt command executed successfully. Output saved to {report_file}\n")
 
-        # Get the file name's prefix to the left of the . from input_file. Ignore the path.
-        prefix = input_file.split('/')[-1].split('.')[0]
-        # extension = input_file.split('/')[-1].split('.')[1]
 
         # Return in a dictionary two file names found in the result_dir folder: The first has a .html prefix and the second has '.cor.' in the name and its filename prefix is the same as the input file's prefix.
         return {
@@ -49,7 +52,9 @@ def run_NanoFilt(input_file, result_dir, report_file, length, maxlength, quality
         }
 
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while running NanoFilt: {e}")
+        logging.error(f"NanoFilt failed with exit status {e.returncode}")
+        logging.error(f"NanoFilt stderr: {e.stderr}")
+        raise ValueError(f"NanoFilt failed: {e.stderr}")
 
 
 def upload_reads(callback_url, reads_file, ws_name, reads_obj_name, source_reads_upa, isInterleaved):

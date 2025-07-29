@@ -64,13 +64,13 @@ class kb_nanofiltTest(unittest.TestCase):
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
         ret = self.serviceImpl.run_kb_nanofilt(self.ctx, {'workspace_name': 'allenbh:narrative_1753284786806',
-                                                             'input_reads_ref': '75985/3/1',
+                                                             'input_reads_ref': '75985/5/1',
                                                              'output_reads_name': 'test_output_reads_name',
-                                                             'length': '1000', 
-                                                             'maxlength': '2000', 
-                                                             'quality': '10', 
-                                                             'mingc': '0.3', 
-                                                             'maxgc': '0.7', 
-                                                             'headcrop': '0', 
-                                                             'tailcrop': '0', 
-                                                             'threads': '10'})
+                                                             'length': 1000, 
+                                                             'maxlength': 2000, 
+                                                             'quality': 10, 
+                                                             'mingc': 0.3, 
+                                                             'maxgc': 0.7, 
+                                                             'headcrop': 0, 
+                                                             'tailcrop': 0, 
+                                                             'threads': 10})
