@@ -73,10 +73,7 @@
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "is_output_name": true,
-                "valid_ws_types": [
-                    "KBaseFile.SingleEndLibrary"
-                ]}
+                "valid_ws_types": [ ]}
         },
         {
             "id": "headcrop",
@@ -109,7 +106,6 @@
             "text_options": {
                 "is_output_name": true,
                 "valid_ws_types": [
-                    "KBaseFile.PairedEndLibrary",
                     "KBaseFile.SingleEndLibrary"
                 ]
             }

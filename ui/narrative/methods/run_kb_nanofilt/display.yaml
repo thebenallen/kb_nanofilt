@@ -85,8 +85,6 @@ parameters :
             Crop the last N bases from the tail of each read. This is useful for removing low
             quality bases at the end of reads. If you do not want to crop reads, leave this blank.
 
-
-
     headcrop :
         ui-name : |
             Head Crop
