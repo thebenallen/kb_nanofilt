@@ -11,7 +11,30 @@
     },
     "parameters": [ 
         {
-            "id": "parameter_1",
+            "id": "input_reads_ref",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [
+                "KBaseFile.SingleEndLibrary"
+                 ]}
+        },
+        {
+            "id": "length",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },
+        {
+            "id": "maxlength",
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
@@ -19,6 +42,76 @@
             "field_type": "text",
             "text_options": {
                 "valid_ws_types": [ ]
+            }
+        },
+                {
+            "id": "quality",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },        {
+            "id": "mingc",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },
+        {
+            "id": "maxgc",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "is_output_name": true,
+                "valid_ws_types": [
+                    "KBaseFile.SingleEndLibrary"
+                ]}
+        },
+        {
+            "id": "headcrop",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },
+        {
+            "id": "tailcrop",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },{
+            "id": "output_reads_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "is_output_name": true,
+                "valid_ws_types": [
+                    "KBaseFile.PairedEndLibrary",
+                    "KBaseFile.SingleEndLibrary"
+                ]
             }
         }
     ],
@@ -35,8 +128,40 @@
                     "narrative_system_variable": "workspace_id",
                     "target_property": "workspace_id"
                 },{
-                    "input_parameter": "parameter_1",
-                    "target_property": "parameter_1"
+                    "input_parameter": "input_reads_ref",
+                    "target_property": "input_reads_ref",
+                    "target_type_transform": "resolved-ref"
+                },{
+                    "input_parameter": "length",
+                    "target_property": "length"
+                },
+                {
+                    "input_parameter": "maxlength",
+                    "target_property": "maxlength"
+                },
+                {
+                    "input_parameter": "quality",
+                    "target_property": "quality"
+                },
+                {
+                    "input_parameter": "mingc",
+                    "target_property": "mingc"
+                },
+                {
+                    "input_parameter": "maxgc",
+                    "target_property": "maxgc"
+                },
+                {
+                    "input_parameter": "headcrop",
+                    "target_property": "headcrop"
+                },
+                {
+                    "input_parameter": "tailcrop",
+                    "target_property": "tailcrop"
+                },
+                {
+                    "input_parameter": "output_reads_name",
+                    "target_property": "output_reads_name"
                 }
             ],
             "output_mapping": [
