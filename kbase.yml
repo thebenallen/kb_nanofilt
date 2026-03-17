@@ -2,7 +2,7 @@ module-name:
     kb_nanofilt
 
 module-description:
-    A KBase module
+    NanoFilt module for KBase
 
 service-language:
     python
